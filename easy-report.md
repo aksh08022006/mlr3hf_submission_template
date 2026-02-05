@@ -2,7 +2,7 @@
 
 Contributor: Aksh Kaushik
 GitHub: https://github.com/aksh08022006/mlr3hf
-Live Report (optional): https://aksh08022006.github.io/mlr3hf/
+Live Report (optional): [https://aksh08022006.github.io/mlr3hf/](https://aksh08022006.github.io/mlr3hf_submission_template/)
 Date: 2026-02-05
 
 1) My Logic & Dataset Choice
