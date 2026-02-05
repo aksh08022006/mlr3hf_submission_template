@@ -1,0 +1,35 @@
+Subject: GSoC mlr3hf test submission — [YOUR NAME]
+
+Hello Toby and Sebastian,
+
+I have completed the contributor tests for the `mlr3hf` project and added the reports. Please find the links below:
+
+
+Summary:
+
+If you would like access to the repo or CI results, please let me know and I will grant permissions or provide artifacts.
+
+```plaintext
+Subject: GSoC mlr3hf test submission — Aksh Kaushik
+
+Hello Toby and Sebastian,
+
+I have completed the contributor tests for the `mlr3hf` project and added the reports. Please find the links below:
+
+- Easy Task (live report): https://aksh08022006.github.io/mlr3hf/
+- Hard Task (live report): https://aksh08022006.github.io/mlr3hf-hard/
+- GitHub repository: https://github.com/aksh08022006/mlr3hf
+
+Summary:
+
+- The easy task demonstrates `mlr3oml::otsk()` usage for classification Tasks and includes a small handcrafted dataset to validate mixed column types and role inference.
+- The hard task documents a prototype `htsk()` for Hugging Face-hosted CSVs (shorthand `hf:`) and outlines a `reticulate`-based bridge for robust Hugging Face dataset access and streaming.
+
+If you would like access to the repository, CI logs, or any artifacts, please let me know and I will provide them or grant access.
+
+Thanks,
+
+Aksh Kaushik
+aksh.heisenberg@gmail.com
+
+``` 
