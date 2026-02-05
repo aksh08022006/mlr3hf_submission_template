@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSoC 2026: mlr3 Integration - Hard Task</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f6f8fa;
+            color: #24292e;
+        }
+        h1, h2, h3 { color: #0366d6; }
+        code {
+            background: #f6f8fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            overflow-x: auto;
+        }
+        .section {
+            background: white;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .nav {
+            background: white;
+            border-bottom: 1px solid #e1e4e8;
+            padding: 15px 0;
+            margin-bottom: 20px;
+        }
+        .nav a {
+            color: #0366d6;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        .nav a:hover { text-decoration: underline; }
+        .option-box {
+            border-left: 4px solid #0366d6;
+            padding-left: 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="/">← Back to Submission</a>
+        <a href="/mlr3hf/">Easy Task</a>
+        <a href="/mlr3hf-hard/">Hard Task</a>
+    </div>
+
+    <h1>GSoC 2026: mlr3 Integration - Hard Task</h1>
+    
+    <div class="section">
+        <h2>Contributor Information</h2>
+        <p><strong>Contributor:</strong> Aksh Kaushik</p>
+        <p><strong>GitHub:</strong> <a href="https://github.com/aksh08022006/mlr3hf" target="_blank">github.com/aksh08022006/mlr3hf</a></p>
+        <p><strong>Date:</strong> 2026-02-05</p>
+    </div>
+
+    <div class="section">
+        <h2>Goal</h2>
+        <p>Connect <code>mlr3</code> to Hugging Face datasets and convert a HF dataset to an <code>mlr3::Task</code>.</p>
+    </div>
+
+    <div class="section">
+        <h2>Summary of Approach</h2>
+        <div class="option-box">
+            <h3>Option A (Prototype):</h3>
+            <p>Use a simple CSV download approach for HF repos with CSV files. This is implemented in the prototype function <code>htsk()</code> which accepts a shorthand <code>hf:owner/repo/path/to/file.csv</code> and downloads the resolved file from <code>https://huggingface.co/datasets/&lt;owner/repo&gt;/resolve/main/&lt;path&gt;</code>.</p>
+        </div>
+        <div class="option-box">
+            <h3>Option B (Recommended for Full Support):</h3>
+            <p>Use <code>reticulate</code> to call Python's <code>datasets</code> or the <code>hfhub</code> client to support multiple dataset formats and streaming. This avoids loading whole datasets into R memory.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Implementation (Prototype <code>htsk()</code>)</h2>
+        <pre><code>library(mlr3)
+library(mlr3hf) # your package
+
+# Example: simple hf: shorthand
+task &lt;- htsk('hf:username/repo/path/to/file.csv', target = 'label')
+print(task)</code></pre>
+    </div>
+
+    <div class="section">
+        <h2>Example Using Reticulate + Python <code>datasets</code></h2>
+        <pre><code>library(reticulate)
+datasets &lt;- import('datasets')
+ds &lt;- datasets$load_dataset('your_dataset_name')
+# convert to data.frame in chunks or filter columns, then to mlr3 Task</code></pre>
+    </div>
+
+    <div class="section">
+        <h2>Results</h2>
+        <p>Paste the <code>print()</code> output of the created <code>mlr3::Task</code> here.</p>
+        <p>If you used a streaming bridge, describe how you validated that only needed rows are loaded.</p>
+    </div>
+
+    <div class="section">
+        <h2>Justification &amp; Methods</h2>
+        <p>Design choices include:</p>
+        <ul>
+            <li><strong>Memory-safety via streaming:</strong> Avoid loading entire datasets into memory</li>
+            <li><strong>Use of <code>reticulate</code>:</strong> Robust Hugging Face access</li>
+            <li><strong>Fallback prototype:</strong> CSV-hosted datasets support</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Reproducibility</h2>
+        <p>Commands and environment notes:</p>
+        <pre><code># Install reticulate / setup conda
+Rscript -e "install.packages('reticulate', repos='https://cloud.r-project.org'); reticulate::install_miniconda()"
+# Install Python package datasets
+python -m pip install datasets
+# Run R script that uses reticulate to load dataset and call htsk bridge</code></pre>
+    </div>
+
+    <hr>
+    <footer style="text-align: center; margin-top: 40px; color: #666;">
+        <p>GSoC 2026 mlr3hf Submission | <a href="https://github.com/aksh08022006/mlr3hf">View on GitHub</a></p>
+    </footer>
+</body>
+</html>
